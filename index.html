@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Encryptor/Decryptor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"], input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .input-group input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .progress-bar {
+            display: none;
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .progress-bar-fill {
+            height: 20px;
+            width: 0;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>File Encryptor/Decryptor</h1>
+        <div class="input-group">
+            <label for="fileInput">Select File:</label>
+            <input type="file" id="fileInput">
+        </div>
+        <div class="input-group">
+            <label for="password">Enter Password:</label>
+            <input type="password" id="password" placeholder="Enter password">
+        </div>
+        <button onclick="encryptFile()">Encrypt</button>
+        <button onclick="decryptFile()">Decrypt</button>
+        <div class="progress-bar" id="progress-bar">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+    </div>
+    <script>
+        async function encryptFile() {
+            const fileInput = document.getElementById('fileInput');
+            const password = document.getElementById('password').value;
+            if (fileInput.files.length === 0 || !password) {
+                alert('Please select a file and enter a password.');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            const arrayBuffer = await file.arrayBuffer();
+            const key = await getKey(password);
+
+            toggleProgressBar(true);
+            const encrypted = await encrypt(arrayBuffer, key);
+            toggleProgressBar(false);
+            
+            download(encrypted, file.name + '.enc');
+        }
+
+        async function decryptFile() {
+            const fileInput = document.getElementById('fileInput');
+            const password = document.getElementById('password').value;
+            if (fileInput.files.length === 0 || !password) {
+                alert('Please select a file and enter a password.');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            const arrayBuffer = await file.arrayBuffer();
+            const key = await getKey(password);
+
+            toggleProgressBar(true);
+            const decrypted = await decrypt(arrayBuffer, key);
+            toggleProgressBar(false);
+            
+            const originalFileName = file.name.replace('.enc', '');
+            const decryptedFileName = addDecryptedPostfix(originalFileName);
+            download(decrypted, decryptedFileName);
+        }
+
+        async function getKey(password) {
+            const enc = new TextEncoder();
+            const keyMaterial = await crypto.subtle.importKey(
+                'raw',
+                enc.encode(password),
+                { name: 'PBKDF2' },
+                false,
+                ['deriveKey']
+            );
+            return crypto.subtle.deriveKey(
+                {
+                    name: 'PBKDF2',
+                    salt: enc.encode('salt'),
+                    iterations: 100000,
+                    hash: 'SHA-256'
+                },
+                keyMaterial,
+                { name: 'AES-GCM', length: 256 },
+                true,
+                ['encrypt', 'decrypt']
+            );
+        }
+
+        async function encrypt(data, key) {
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const encrypted = await crypto.subtle.encrypt(
+                { name: 'AES-GCM', iv: iv },
+                key,
+                data
+            );
+            return new Uint8Array([...iv, ...new Uint8Array(encrypted)]);
+        }
+
+        async function decrypt(data, key) {
+            const iv = data.slice(0, 12);
+            const encryptedData = data.slice(12);
+            try {
+                const decrypted = await crypto.subtle.decrypt(
+                    { name: 'AES-GCM', iv: iv },
+                    key,
+                    encryptedData
+                );
+                return new Uint8Array(decrypted);
+            } catch (e) {
+                alert('Decryption failed. Incorrect password or corrupt file.');
+                throw e;
+            }
+        }
+
+        function addDecryptedPostfix(fileName) {
+            const lastDotIndex = fileName.lastIndexOf('.');
+            if (lastDotIndex === -1) {
+                return fileName + '-decrypted';
+            }
+            const namePart = fileName.slice(0, lastDotIndex);
+            const extensionPart = fileName.slice(lastDotIndex);
+            return namePart + '-decrypted' + extensionPart;
+        }
+
+        function download(data, fileName) {
+            const blob = new Blob([data], { type: 'application/octet-stream' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function toggleProgressBar(show) {
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.display = show ? 'block' : 'none';
+            if (show) {
+                const progressBarFill = document.getElementById('progress-bar-fill');
+                let width = 0;
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                    } else {
+                        width++;
+                        progressBarFill.style.width = width + '%';
+                    }
+                }, 30);
+            }
+        }
+    </script>
+</body>
+</html>
