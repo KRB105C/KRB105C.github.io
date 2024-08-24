@@ -1,0 +1,43 @@
+# Alur kerja sederhana untuk menyebarkan konten statistik ke Halaman GitHub
+Nama: Terapkan konten statistik ke Halaman
+
+pada:
+  # Berjalan pada push yang menargetkan cabang default
+  dorongan:
+    Cabang: ["utama"]
+
+  # Penciptaan Anda menjalankan alur kerja ini secara manual dari tab Tindakan
+  alur kerja_pengiriman:
+
+# Menetapkan izin GITHUB_TOKEN untuk mengizinkan penerapan ke Halaman GitHub
+izin:
+  Isi: membaca
+  Halaman: Menulis
+  token-id: Menulis
+
+# Izinkan hanya satu penerapan yang sama, lewati proses yang diantrekan antara proses yang sedang berlangsung dan proses yang terakhir.
+# Namun, JANGAN membatalkan proses yang sedang berlangsung karena kami ingin menyelesaikan penerapan produksi ini.
+konkurensi:
+  kelompok: "Halaman"
+  Pembatalan sedang berlangsung: PALSU
+
+Pekerjaan:
+  # Penerapan pekerjaan tunggal karena kami baru saja menerapkannya
+  menyebarkan:
+    Lingkungan:
+      Nama: halaman github
+      url: ${{ langkah.deployment.outputs.page_url }}
+    berjalan terus: ubuntu-terbaru
+    Tangga:
+      - Nama: Check-out
+        kegunaan: tindakan/checkout@v4
+      - Nama: Pengaturan Halaman
+        kegunaan: tindakan/konfigurasi-halaman@v5
+      - Nama: Unggah artefak
+        kegunaan: tindakan/unggah-halaman-artifact@v3
+        dengan:
+          # Unggah seluruh repositori
+          Jalur: '.'
+      - Nama: Terapkan ke Halaman GitHub
+        pengenal: Penyebaran
+        kegunaan: tindakan/deploy-halaman@v4
