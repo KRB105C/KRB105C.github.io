@@ -44,13 +44,13 @@ function closeModal() {
                         var thumbnail = firstImage ? firstImage.src : 'https://krb.home.blog/wp-content/uploads/2024/08/inshot_20240825_1125134798457414340051033372.jpg';
 
                         output += `
-                            <div class="post-item">
-                                <a href="${postUrl}" target="_blank">
-                                    <img src="${thumbnail}" alt="Thumbnail">
-                                </a>
-                                <div class="post-details">
-                                    <a href="${postUrl}" target="_blank">${title}</a>
-                                    <p>${new Date(post.published).toLocaleDateString()}</p>
+    <div class="post-item">
+        <a href="${postUrl}">
+            <img src="${thumbnail}" alt="Thumbnail">
+        </a>
+        <div class="post-details">
+            <a href="${postUrl}">${title}</a>
+            <p>${new Date(post.published).toLocaleDateString()}p>
                                 </div>
                             </div>
                         `;
