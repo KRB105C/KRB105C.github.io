@@ -18,7 +18,94 @@
             color: #333;
         }
         
-        
+/* Modal overlay */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-out;
+    opacity; 0
+}
+
+/* Modal content */
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    animation: scaleUp 0.5s ease-out forwards;
+    margin-top: -62%; /* Adjust this value to move modal up */
+        max-width: 900%; /* Ensure modal does not exceed viewport width */
+    max-height: 300%; /* Ensure modal does not exceed viewport height */
+    overflow: auto; /* Add scroll if content is too large */
+
+}
+
+/* Button styles */
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #0056b3, #007bff);
+    transform: scale(1.05);
+}
+
+/* Button hover effect */
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease-in-out;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+}
+
+button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Modal animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
         
 #search-container {
     text-align: center;
@@ -272,15 +359,30 @@
     <div class="spinner"></div>
 </div>
     <!-- Postingan 2 -->
-    <div class="post-item">
-        <a href="https://post.sskrb.cloud/2024/08/free-netflix-and-spotify-premium.html" target="_blank">
-            <img src="https://krb.home.blog/wp-content/uploads/2024/08/netflixxspotify5073254781155008256.jpg" alt="Netflix x Spotify">
-        </a>
-        <div class="post-details">
-            <a href="https://post.sskrb.cloud/2024/08/free-netflix-and-spotify-premium.html" target="_blank">Free Netflix and Spotify premium accounts</a>
-            <p>30 Agustus 2024</p>
-        </div>
+<div class="post-item">
+    <a href="#" onclick="showOptions(event, 'https://www.sskrb.cloud/netflix.html', 'https://www.sskrb.cloud/spotify.html')">
+    <img src="https://krb.home.blog/wp-content/uploads/2024/08/netflixxspotify5073254781155008256.jpg" alt="Netflix x Spotify">
+</a>
+<div class="post-details">
+    <a href="#" onclick="showOptions(event, 'https://www.sskrb.cloud/netflix.html', 'https://www.sskrb.cloud/spotify.html')">Free Netflix and Spotify premium accounts</a>
+    <p>30 Agustus 2024</p>
+</div>
+</div>
+<!-- Opsi Modal -->
+<div id="options-modal" class="modal">
+    <div class="modal-content">
+        <p>Pilih opsi untuk melanjutkan:</p>
+        <button data-option="netflix" onclick="navigateTo('netflix')">Netflix</button>
+        <button data-option="spotify" onclick="navigateTo('spotify')">Spotify</button>
+        <button onclick="closeModal()">Batal</button>
     </div>
+</div>
+
+
+        
+            
+        
+    
 
 
 
@@ -296,8 +398,8 @@
 
 
 
-
-
       <script src="script.js"></script>
+
+    
 </body>
 </html>
