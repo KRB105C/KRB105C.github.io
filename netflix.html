@@ -1,4 +1,4 @@
-<!DOCTYPEhtml>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -285,84 +285,84 @@
                 <span class="close" onclick="closeModal()">&times;</span>
                 <p>hubungi admin melalui Whatsapp</p>
                 <button class="confirm" onclick="confirmAction()">Ya</button>
-                <tombol kelas="Membatalkan" klik="closeModal()">Begitu</tombol>
+                <button class="cancel" onclick="closeModal()">Tak</button>
             </div>
         </div>
 
-        <gambar src="https://krb.home.blog/wp-content/uploads/2024/07/media_240710_211714.gif" alternatif="Logo Netflix" kelas="wadah-img">
-        <gambar src="https://krb.home.blog/wp-content/uploads/2024/07/wp-17206141699412326268048999683195.png" alternatif="Logo Netflix" pengenal="gambar saya">
+        <img src="https://krb.home.blog/wp-content/uploads/2024/07/media_240710_211714.gif" alt="Netflix Logo" class="container-img">
+        <img src="https://krb.home.blog/wp-content/uploads/2024/07/wp-17206141699412326268048999683195.png" alt="Netflix Logo" id="myImage">
         
- <H2>Koleksi Akun Netflix</H2>
-        <P>Kumpulan akun Netflix dengan masa aktif hingga periode yang tidak ditentukan.</P>
-         <P pengenal="pengunjungCountText">Anda telah mengunjungi situs ini <menjangkau pengenal="jumlah pengunjung">0</menjangkau> kali.</P> 
-        <!-- Penghitungan jumlah kunjungan
+ <h2>Koleksi Akun Netflix</h2>
+        <p>Kumpulan akun Netflix dengan masa aktif hingga periode yang tidak ditentukan.</p>
+         <p id="visitorCountText">Anda telah mengunjungi situs ini <span id="visitorCount">0</span> kali.</p> 
+        <!-- Penghitung jumlah kunjungan
         -->
-        <tombol kelas="tombol bantuan" klik="tunjukkanBantuan()">?</tombol>
+        <button class="help-button" onclick="showHelp()">?</button>
 
-        <div kelas="Akun">
-    <H3>akun 1</H3>
-    <div><menjangkau kelas="label">Surel:</menjangkau> <menjangkau pengenal="Surel1"></menjangkau> <tombol klik="copyToClipboard('email1')">Salin</tombol></div>
-    <div><menjangkau kelas="label">hal:</menjangkau> <menjangkau pengenal="Kata sandi1"></menjangkau> <tombol klik="copyToClipboard('kata sandi1')">Salin</tombol></div>
+        <div class="account">
+    <h3>Akun 1</h3>
+    <div><span class="label">email:</span> <span id="email1"></span> <button onclick="copyToClipboard('email1')">Salin</button></div>
+    <div><span class="label">pw:</span> <span id="password1"></span> <button onclick="copyToClipboard('password1')">Salin</button></div>
 </div>
 
-<div kelas="Akun">
-    <H3>akun 2</H3>
-    <div><menjangkau kelas="label">Surel:</menjangkau> <menjangkau pengenal="Surel2"></menjangkau> <tombol klik="copyToClipboard('email2')">Salin</tombol></div>
-    <div><menjangkau kelas="label">hal:</menjangkau> <menjangkau pengenal="Kata sandi2"></menjangkau> <tombol klik="copyToClipboard('kata sandi2')">Salin</tombol></div>
+<div class="account">
+    <h3>Akun 2</h3>
+    <div><span class="label">email:</span> <span id="email2"></span> <button onclick="copyToClipboard('email2')">Salin</button></div>
+    <div><span class="label">pw:</span> <span id="password2"></span> <button onclick="copyToClipboard('password2')">Salin</button></div>
 </div>
 
-<div kelas="Akun">
-    <H3>akun 3</H3>
-    <div><menjangkau kelas="label">Surel:</menjangkau> <menjangkau pengenal="Surel3"></menjangkau> <tombol klik="copyToClipboard('email3')">Salin</tombol></div>
-    <div><menjangkau kelas="label">hal:</menjangkau> <menjangkau pengenal="Kata sandi3"></menjangkau> <tombol klik="copyToClipboard('kata sandi3')">Salin</tombol></div>
+<div class="account">
+    <h3>Akun 3</h3>
+    <div><span class="label">email:</span> <span id="email3"></span> <button onclick="copyToClipboard('email3')">Salin</button></div>
+    <div><span class="label">pw:</span> <span id="password3"></span> <button onclick="copyToClipboard('password3')">Salin</button></div>
 </div>
 
-<div kelas="Akun">
-    <H3>akun 4</H3>
-    <div><menjangkau kelas="label">Surel:</menjangkau> <menjangkau pengenal="Surel4"></menjangkau> <tombol klik="copyToClipboard('email4')">Salin</tombol></div>
-    <div><menjangkau kelas="label">hal:</menjangkau> <menjangkau pengenal="Kata sandi4"></menjangkau> <tombol klik="copyToClipboard('kata sandi4')">Salin</tombol></div>
+<div class="account">
+    <h3>Akun 4</h3>
+    <div><span class="label">email:</span> <span id="email4"></span> <button onclick="copyToClipboard('email4')">Salin</button></div>
+    <div><span class="label">pw:</span> <span id="password4"></span> <button onclick="copyToClipboard('password4')">Salin</button></div>
 </div>
 
-<div kelas="Akun">
-    <H3>akun 5</H3>
-    <div><menjangkau kelas="label">Surel:</menjangkau> <menjangkau pengenal="Surel5"></menjangkau> <tombol klik="copyToClipboard('email5')">Salin</tombol></div>
-    <div><menjangkau kelas="label">hal:</menjangkau> <menjangkau pengenal="Kata sandi5"></menjangkau> <tombol klik="copyToClipboard('kata sandi5')">Salin</tombol></div>
+<div class="account">
+    <h3>Akun 5</h3>
+    <div><span class="label">email:</span> <span id="email5"></span> <button onclick="copyToClipboard('email5')">Salin</button></div>
+    <div><span class="label">pw:</span> <span id="password5"></span> <button onclick="copyToClipboard('password5')">Salin</button></div>
 </div>
 
-<div kelas="Akun">
-    <H3>akun 6</H3>
-    <div><menjangkau kelas="label">Surel:</menjangkau> <menjangkau pengenal="Surel6"></menjangkau> <tombol klik="copyToClipboard('email6')">Salin</tombol></div>
-    <div><menjangkau kelas="label">hal:</menjangkau> <menjangkau pengenal="Kata sandi6"></menjangkau> <tombol klik="copyToClipboard('kata sandi6')">Salin</tombol></div>
+<div class="account">
+    <h3>Akun 6</h3>
+    <div><span class="label">email:</span> <span id="email6"></span> <button onclick="copyToClipboard('email6')">Salin</button></div>
+    <div><span class="label">pw:</span> <span id="password6"></span> <button onclick="copyToClipboard('password6')">Salin</button></div>
 </div>
 
-<div kelas="Akun">
-    <H3>akun 7</H3>
-    <div><menjangkau kelas="label">Surel:</menjangkau> <menjangkau pengenal="Surel7"></menjangkau> <tombol klik="copyToClipboard('email7')">Salin</tombol></div>
-    <div><menjangkau kelas="label">hal:</menjangkau> <menjangkau pengenal="Kata sandi7"></menjangkau> <tombol klik="copyToClipboard('kata sandi7')">Salin</tombol></div>
+<div class="account">
+    <h3>Akun 7</h3>
+    <div><span class="label">email:</span> <span id="email7"></span> <button onclick="copyToClipboard('email7')">Salin</button></div>
+    <div><span class="label">pw:</span> <span id="password7"></span> <button onclick="copyToClipboard('password7')">Salin</button></div>
 </div>
 
-<div kelas="Akun">
-    <H3>akun 8</H3>
-    <div><menjangkau kelas="label">Surel:</menjangkau> <menjangkau pengenal="Surel8"></menjangkau> <tombol klik="copyToClipboard('email8')">Salin</tombol></div>
-    <div><menjangkau kelas="label">hal:</menjangkau> <menjangkau pengenal="Kata sandi8"></menjangkau> <tombol klik="copyToClipboard('kata sandi8')">Salin</tombol></div>
+<div class="account">
+    <h3>Akun 8</h3>
+    <div><span class="label">email:</span> <span id="email8"></span> <button onclick="copyToClipboard('email8')">Salin</button></div>
+    <div><span class="label">pw:</span> <span id="password8"></span> <button onclick="copyToClipboard('password8')">Salin</button></div>
 </div>
 
-<div kelas="Akun">
-    <H3>akun 9</H3>
-    <div><menjangkau kelas="label">Surel:</menjangkau> <menjangkau pengenal="Surel9"></menjangkau> <tombol klik="copyToClipboard('email9')">Salin</tombol></div>
-    <div><menjangkau kelas="label">hal:</menjangkau> <menjangkau pengenal="Kata sandi9"></menjangkau> <tombol klik="copyToClipboard('kata sandi9')">Salin</tombol></div>
+<div class="account">
+    <h3>Akun 9</h3>
+    <div><span class="label">email:</span> <span id="email9"></span> <button onclick="copyToClipboard('email9')">Salin</button></div>
+    <div><span class="label">pw:</span> <span id="password9"></span> <button onclick="copyToClipboard('password9')">Salin</button></div>
 </div>
 
-    <div pengenal="bantuanPopup" kelas="bantuan-popup">
-        <H3>Bantuan</H3>
-        <P>Jika Anda mengalami masalah saat menonton / streaming film, cobalah menggunakan VPN (Amerika Serikat / Singapura)</P>
-        <tombol klik="tutupBantuan()">Tutup</tombol>
+    <div id="helpPopup" class="help-popup">
+        <h3>Bantuan</h3>
+        <p>Jika anda mengalami masalah saat menonton / streaming film, cobalah untuk menggunakan VPN (Amerika Serikat / Singapura)</p>
+        <button onclick="closeHelp()">Tutup</button>
     </div>
-        <!-- Konten HTML Anda yang ada berlanjut di sini... -->
+        <!-- Your existing HTML content continues here... -->
 
     </div>
 
- <naskah>
+ <script>
  
  // Fungsi untuk memparsing teks menjadi objek
 function parseAccountData(text) {
@@ -487,20 +487,20 @@ fetch('https://raw.githubusercontent.com/KRB105C/Tess/main/akunnetflixx')
                         
                         
                         
-                        dokumen.body.innerHTML = document.body.innerHTML.replace(/pw:/g, 'पासवर्ड:');
+                        document.body.innerHTML = document.body.innerHTML.replace(/pw:/g, 'पासवर्ड:');
                         
                         
                     }
                 });
         }
 
-        document.addEventListener('DOMContentLoaded', deteksiLocationAndTranslate);
+        document.addEventListener('DOMContentLoaded', detectLocationAndTranslate);
 
-        document.addEventListener('visibilitasperubahan', function() {
-            if (document.visibilityState === 'tersembunyi') {
-                console.log('Pengguna telah meninggalkan halaman.');
-            } else if (document.visibilityState === 'terlihat') {
-                console.log('Pengguna telah kembali ke halaman.');
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                console.log('User has left the page.');
+            } else if (document.visibilityState === 'visible') {
+                console.log('User has returned to the page.');
                 
 
                         
@@ -509,31 +509,31 @@ fetch('https://raw.githubusercontent.com/KRB105C/Tess/main/akunnetflixx')
           
 
         if (localStorage.getItem('visitorCount')) {
-            biarkan menghitung = parseInt(localStorage.getItem('visitorCount'));
-            menghitung++;
-            localStorage.setItem('visitorCount', hitung);
-            document.getElementById('visitorCount').innerText = hitungan;
-        } kalau tidak {
+            let count = parseInt(localStorage.getItem('visitorCount'));
+            count++;
+            localStorage.setItem('visitorCount', count);
+            document.getElementById('visitorCount').innerText = count;
+        } else {
             localStorage.setItem('visitorCount', 1);
-            dokumen.dapatkanElementById('visitorCount').innerText = 1;
+            document.getElementById('visitorCount').innerText = 1;
         }
 
-        dokumen.addEventListener('menu konteks', fungsi(mis) {
+        document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
 
-        document.addEventListener('pilihmulai', fungsi(mis) {
+        document.addEventListener('selectstart', function(e) {
             e.preventDefault();
         });
 
-        dokumen.addEventListener('keydown', function(e) {
-            if (e.ctrlKey &amp;&amp; (e.key === 'c' || e.key === 'C') || e.metaKey &amp;&amp; (e.key === 'c' || e.key = == 'C')) {
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'C') || e.metaKey && (e.key === 'c' || e.key === 'C')) {
                 e.preventDefault();
             }
         });
-    </naskah>
-</tubuh>
-</HTML>
+    </script>
+</body>
+</html>
 
 
 
