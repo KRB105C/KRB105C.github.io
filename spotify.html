@@ -509,11 +509,11 @@ fetch('https://raw.githubusercontent.com/KRB105C/Tess/main/akunspotifyyy')
         }
 
         function showHelp() {
-            dokumen.getElementById('helpPopup').style.display = 'block';
+            document.getElementById('helpPopup').style.display = 'block';
         }
 
         function closeHelp() {
-            dokumen.getElementById('helpPopup').style.display = 'none';
+            document.getElementById('helpPopup').style.display = 'none';
         }
 
         function detectLocationAndTranslate() {
@@ -532,9 +532,9 @@ fetch('https://raw.githubusercontent.com/KRB105C/Tess/main/akunspotifyyy')
                         document.body.innerHTML = document.body.innerHTML.replace(/hubungi admin melalui Whatsapp/g, 'व्हाट्सएप के माध्यम से एडमिन से संपर्क करें');
                         document.body.innerHTML = document.body.innerHTML.replace(/Ya/g, 'हाँ');
                         document.body.innerHTML = document.body.innerHTML.replace(/Tak/g, 'नहीं');
-                        dokumen.body.innerHTML = document.body.innerHTML.replace(/Bantuan/g, 'सहायता');
-                        dokumen.body.innerHTML = document.body.innerHTML.replace(/Jika butuh bantuan hubungi WhatsApp 6285751882714/g, 'मदद की ज़रूरत है?  व्हाट्सएप +6285751882714 पर संपर्क करेंं।');
-                        dokumen.body.innerHTML = document.body.innerHTML.replace(/Tutup/g, 'बंद करें');
+                        document.body.innerHTML = document.body.innerHTML.replace(/Bantuan/g, 'सहायता');
+                        document.body.innerHTML = document.body.innerHTML.replace(/Jika butuh bantuan hubungi WhatsApp 6285751882714/g, 'मदद की ज़रूरत है?  व्हाट्सएप +6285751882714 पर संपर्क करेंं।');
+                        document.body.innerHTML = document.body.innerHTML.replace(/Tutup/g, 'बंद करें');
                         document.body.innerHTML = document.body.innerHTML.replace(/email:/g, 'ईमेल:');
                         
                         
@@ -546,12 +546,12 @@ fetch('https://raw.githubusercontent.com/KRB105C/Tess/main/akunspotifyyy')
                 });
         }
 
-        document.addEventListener('DOMContentLoaded', deteksiLocationAndTranslate);
+        document.addEventListener('DOMContentLoaded', detectLocationAndTranslate);
 
-        document.addEventListener('visibilitasperubahan', function() {
+        document.addEventListener('visibilitychange', function() {
             if (document.visibilityState === 'hidden') {
                 console.log('User has left the page.');
-            } else if (document.visibilityState === 'terlihat') {
+            } else if (document.visibilityState === 'visible') {
                 console.log('User has returned to the page.');
                 
 
@@ -561,28 +561,28 @@ fetch('https://raw.githubusercontent.com/KRB105C/Tess/main/akunspotifyyy')
           
 
         if (localStorage.getItem('visitorCount')) {
-            biarkan menghitung = parseInt(localStorage.getItem('visitorCount'));
-            menghitung++;
-            localStorage.setItem('visitorCount', hitung);
-            document.getElementById('visitorCount').innerText = hitungan;
-        } kalau tidak {
+            let count = parseInt(localStorage.getItem('visitorCount'));
+            count++;
+            localStorage.setItem('visitorCount', count);
+            document.getElementById('visitorCount').innerText = count;
+        } else {
             localStorage.setItem('visitorCount', 1);
-            dokumen.getElementById('visitorCount').innerText = 1;
+            document.getElementById('visitorCount').innerText = 1;
         }
 
-        document.addEventListener('menu konteks', fungsi(mis) {
+        document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
 
-        document.addEventListener('pilihmulai', fungsi(mis) {
+        document.addEventListener('selectstart', function(e) {
             e.preventDefault();
         });
 
-        dokumen.addEventListener('keydown', function(e) {
-            if (e.ctrlKey &amp;&amp; (e.key === 'c' || e.key === 'C') || e.metaKey &amp;&amp; (e.key === 'c' || e.key = == 'C')) {
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'C') || e.metaKey && (e.key === 'c' || e.key === 'C')) {
                 e.preventDefault();
             }
         });
-    </naskah>
-</tubuh>
-</HTML>
+    </script>
+</body>
+</html>
