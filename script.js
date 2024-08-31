@@ -2,6 +2,29 @@ var blogId = '1337572638676421245';
         var apiKey = 'AIzaSyCajPuSxO1itrMNcvQVzX1-b7T6srVyAQg';
         var maxResults = 199;
 
+
+let targetNetflixUrl = '';
+let targetSpotifyUrl = '';
+
+function showOptions(event, netflixUrl, spotifyUrl) {
+    event.preventDefault();
+    targetNetflixUrl = netflixUrl;
+    targetSpotifyUrl = spotifyUrl;
+    document.getElementById('options-modal').style.display = 'flex';
+}
+
+function navigateTo(option) {
+    if (option === 'netflix' && targetNetflixUrl) {
+        window.location.href = targetNetflixUrl;
+    } else if (option === 'spotify' && targetSpotifyUrl) {
+        window.location.href = targetSpotifyUrl;
+    }
+}
+
+function closeModal() {
+    document.getElementById('options-modal').style.display = 'none';
+}
+
         function fetchPosts() {
             var url = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}&maxResults=${maxResults}`;
             fetch(url)
