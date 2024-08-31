@@ -1,413 +1,303 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <meta name="description" content="
-       Free Spotify accounts recently 2024">
-    <meta name="keywords" content="Free Netflix Accounts KRB, akun spotify gratis">
-    <meta name="author" content="Kamar Rumah Berdoa">
-    <title>Koleksi Akun Spotify</title>
-    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/023/986/494/non_2x/spotify-logo-spotify-logo-transparent-spotify-icon-transparent-free-free-png.png">
+    <title>Daftar Postingan Blog</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #f4f4f4;
+            color: #333;
             margin: 0;
             padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 10px;
+            color: #333;
+        }
+        
+        
+        
+#search-container {
+    text-align: center;
+    margin: 20px 10px;
+    position: sticky;
+    top: 0;
+    background-color: #0000002b;
+    padding: 35px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: padding 0.9s ease, height 0.9s ease;
+}
+
+#search-container.shrunk {
+    padding: 0px;
+    height: 25px; /* Kecilkan tinggi saat ciut */
+}
+
+#search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.9s ease;
+}
+
+#search-form input[type="text"] {
+    height: 30px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box;
-        }
-
-
-
-.content {
-    padding: 20px;
-    margin-bottom: 70px; /* Memberikan ruang untuk tombol mengambang */
 }
 
-.floating-home {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    z-index: 1000; /* Memastikan tombol berada di atas elemen lain */
+#search-form input[type="submit"] {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 16px;
+    background-color: #0335ff;
+    color: rgb(255, 251, 250);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.floating-home img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%; /* Membuat tombol berbentuk lingkaran */
+#search-container.shrunk #search-form {
+    transform: scale(0.9); /* Mengecilkan form */
 }
 
-/* Media Query untuk layar kecil */
-@media screen and (max-width: 600px) {
-    .floating-home {
-        bottom: 10px;
-        right: 10px;
-        width: 40px;
-        height: 40px;
-    }
+#search-container.shrunk #search-form input[type="text"] {
+    height: 24px; /* Mengecilkan input */
+    padding: 4px;
+    font-size: 17px;
+}
+
+#search-container.shrunk #search-form input[type="submit"] {
+    height: 24px;
+    padding: 0 8px;
+    font-size: 17px;
 }
 
 
 
 
 
-                        .button-div {
-            display: inline-block;
-            width: 30px; 
-            height: 30px; 
-            background-image: url('https://krb.home.blog/wp-content/uploads/2024/08/whatsapplogo1116555403708291272.jpg');
-            background-size: cover;
-            cursor: pointer;
-            position: absolute; 
-            top: 10px; 
-            left: 10px; 
-        }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-content {
-            background-color: #01361b;
-            margin: 15% auto;
+/* Hapus styling untuk #toggle-btn karena tombol dihilangkan */
+        
+        #blog-posts {
+            max-width: 100%;
+            margin: 0 auto;
             padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .post-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .post-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .post-item img {
+            width: 100%;
             max-width: 300px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+        }
+        .post-item img:hover {
+            transform: scale(1.05);
+        }
+        .post-details {
             text-align: center;
+            width: 100%;
         }
-
-        .close, .confirm, .cancel {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover, .close:focus, .confirm:hover, .confirm:focus, .cancel:hover, .cancel:focus {
-            color: black;
+        .post-details a {
             text-decoration: none;
-            cursor: pointer;
-        }
-
-        .confirm, .cancel {
-            float: none;
-            width: 80px;
-            padding: 10px;
-            margin: 10px 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .confirm {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .cancel {
-            background-color: #f44336;
-            color: white;
-        }
-          
-                  #myImage {
-          display: inline-block;
-          
-            background-size: cover;
-            cursor: pointer;
-            max-width: 100px;
-            margin-bottom: 20px;
-            position: absolute; 
-           top: 85px; 
-            left: 158px;
-            
-        }
-
-        @keyframes float {
-            0% {
-                top: 0%;
-                opacity: 0;
-            }
-            50% {
-                top: 50%;
-                opacity: 1;
-            }
-            100% {
-                top: 100%;
-                opacity: 0;
-            } -->
-            
-        }
-            
-            h2 {
-            color: rgb(217, 234, 255);
-        }
-        
-    
-                    h3 {
-            color: rgb(217, 234, 255);
-        }
-        
-                    div {
-            color: rgb(217, 234, 255);
-        }
-        
-            p {
-            color: rgb(217, 234, 255);
-        }
-
-          
-            
-        .container {
-            background-color: #010300;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            overflow-y: auto; /* Menambahkan kemampuan scroll pada perangkat mobile */
-            max-height: calc(100vh - 40px); /* Agar konten tidak melewati layar */
-        }
-        .container img {
-            max-width: 100px;
-            margin-bottom: 20px;
-        }
-        .account {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #242424;
-            text-align: left;
-        }
-        .account h3 {
-            margin-bottom: 10px;
-        }
-        .account div {
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .account div span {
-            flex: 1;
-        }
-        .account div button {
-            margin-left: 10px;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #1DB954;
-            color: rgb(0, 33, 36);
-            border: 1px solid #03ff4a;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .account div button:hover {
-            background-color: #0b4c27;
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        .label {
+            color: #007BFF;
+            font-size: 18px;
             font-weight: bold;
+            transition: color 0.3s;
+            display: block;
         }
-        .frozen {
+        .post-details a:hover {
+            color: #0056b3;
+        }
+        .post-details p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #555;
+        }
+        /* Tombol scroll ke atas */
+        .scroll-to-top {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            font-size: 2rem;
-        }
-        .help-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #05ffea;
-            color: rgb(1, 54, 50);
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .help-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgb(13, 13, 13);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 10000;
-            display: none;
-        }
-        .help-popup h3 {
-            margin-top: 0;
-        }
-        .help-popup button {
-            margin-top: 20px;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
+            bottom: 20px;
+            right: 20px;
             background-color: #007BFF;
             color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 24px;
             cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
         }
-        .help-popup button:hover {
+        .scroll-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scroll-to-top:hover {
             background-color: #0056b3;
         }
-        @media print {
-            body {
-                display: none;
-            }
-        }
-        #visitorCountText {
-            opacity: 0.5;
-        }
         
-        .plan{
-	font-size: 0.7em;
-	font-weight: lighter;
-	position: relative;
-	top: -27px;
-	right:69px;
-  opacity: 0.0;
+        /* Loading overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        /* Tambahkan transparansi 50% pada tulisan jumlah kunjungan */
+/* Animasi loading (spinner) */
+#loading-overlay .spinner {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Efek Slide-In dari Kiri */
+.post-item {
+    transform: translateX(100%); /* Memulai posisi dari luar tampilan */
+    opacity: 0; /* Mulai dari transparan */
+    transition: transform 0.5s ease-in, opacity 0.5s ease-in; /* Transisi yang mulus */
+}
+
+.post-item.visible {
+    transform: translateX(0); /* Posisi akhir */
+    opacity: 1; /* Opasitas penuh */
+}
+
+/* Efek Slide-Out dari Kiri */
+.post-item.hidden {
+    transform: translateX(-100%); /* Posisi keluar dari tampilan */
+    opacity: 0; /* Transparan */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+        /* Media Queries */
+        @media (min-width: 768px) {
+            #search-form {
+                width: 600px;
+            }
+            .post-item {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .post-item img {
+                margin-right: 20px;
+                max-width: 150px;
+            }
+            
+            
+            
+            .post-details {
+                text-align: left;
+                width: calc(100% - 170px); /* Adjust width based on image size */
+                
+                
+                
+            }
         }
     </style>
 </head>
 <body>
-  
-  
-    
-    <!-- Tombol Home Mengambang -->
-    <a href="https://home.sskrb.cloud" class="floating-home">
-        <img src="https://krb.home.blog/wp-content/uploads/2024/08/homeiconn5360490793337588143.jpg" alt="Home">
-    </a>
-    
- 
- <div class="container">
-        <!--  <div class="floating-text">Tulisan Mengambang</div> -->
-        <a href="https://chat.whatsapp.com/IeiuIJXaJAU8yjs6dDfiFi" class="button-div" onclick="openModal(event);"></a>
 
-        <!-- Modal -->
-        <div id="confirmationModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <p>hubungi admin melalui Whatsapp</p>
-                <button class="confirm" onclick="confirmAction()">Ya</button>
-                <button class="cancel" onclick="closeModal()">Tak</button>
-            </div>
+    <!-- Tombol Scroll ke Atas -->
+    <button class="scroll-to-top" id="scrollToTopBtn" title="Scroll to top">
+        &uarr;
+    </button>
+
+    <h1>KRB List of Post</h1>
+
+    <!-- Kolom Pencarian -->
+    
+    
+<div id="search-container">
+    <form id="search-form" action="https://krb105.blogspot.com/search" method="get">
+        <input type="text" name="q" placeholder="Cari postingan..." required>
+        <input type="submit" value="Cari">
+    
+        </form>
+        <!-- Elemen dengan efek Slide In -->
+
+    
+
+    </div>
+<div id="loading-overlay">
+    <div class="spinner"></div>
+</div>
+    <!-- Postingan 2 -->
+    <div class="post-item">
+        <a href="https://post.sskrb.cloud/2024/08/free-netflix-and-spotify-premium.html" target="_blank">
+            <img src="https://krb.home.blog/wp-content/uploads/2024/08/netflixxspotify5073254781155008256.jpg" alt="Netflix x Spotify">
+        </a>
+        <div class="post-details">
+            <a href="https://post.sskrb.cloud/2024/08/free-netflix-and-spotify-premium.html" target="_blank">Free Netflix and Spotify premium accounts</a>
+            <p>30 Agustus 2024</p>
         </div>
-
-        <img src="https://krb.home.blog/wp-content/uploads/2024/08/spotifyanimm.gif" alt="Spotify Logo" class="container-img">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify Logo" id="myImage">
-
-        <h2>Koleksi Akun Spotify</h2>
-        <p>Kumpulan akun Spotify Premium dengan masa aktif hingga periode yang tidak ditentukan.</p>
-         <p id="visitorCountText">Anda telah mengunjungi situs ini <span id="visitorCount">0</span> kali.</p> 
-        <!-- Penghitung jumlah kunjungan
-        -->
-        <button class="help-button" onclick="showHelp()">?</button>
-
-        <div class="account">
-    <h3>Akun 1</h3>
-    <div><span class="label">email:</span> <span id="email1"></span> <button onclick="copyToClipboard('email1')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password1"></span> <button onclick="copyToClipboard('password1')">Salin</button></div>
-</div>
-
-<div class="account">
-    <h3>Akun 2</h3>
-    <div><span class="label">email:</span> <span id="email2"></span> <button onclick="copyToClipboard('email2')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password2"></span> <button onclick="copyToClipboard('password2')">Salin</button></div>
-</div>
-
-<div class="account">
-    <h3>Akun 3</h3>
-    <div><span class="label">email:</span> <span id="email3"></span> <button onclick="copyToClipboard('email3')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password3"></span> <button onclick="copyToClipboard('password3')">Salin</button></div>
-</div>
-
-<div class="account">
-    <h3>Akun 4</h3>
-    <div><span class="label">email:</span> <span id="email4"></span> <button onclick="copyToClipboard('email4')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password4"></span> <button onclick="copyToClipboard('password4')">Salin</button></div>
-</div>
-
-<div class="account">
-    <h3>Akun 5</h3>
-    <div><span class="label">email:</span> <span id="email5"></span> <button onclick="copyToClipboard('email5')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password5"></span> <button onclick="copyToClipboard('password5')">Salin</button></div>
-</div>
-
-<div class="account">
-    <h3>Akun 6</h3>
-    <div><span class="label">email:</span> <span id="email6"></span> <button onclick="copyToClipboard('email6')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password6"></span> <button onclick="copyToClipboard('password6')">Salin</button></div>
-</div>
-
-<div class="account">
-    <h3>Akun 7</h3>
-    <div><span class="label">email:</span> <span id="email7"></span> <button onclick="copyToClipboard('email7')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password7"></span> <button onclick="copyToClipboard('password7')">Salin</button></div>
-</div>
-
-<div class="account">
-    <h3>Akun 8</h3>
-    <div><span class="label">email:</span> <span id="email8"></span> <button onclick="copyToClipboard('email8')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password8"></span> <button onclick="copyToClipboard('password8')">Salin</button></div>
-</div>
-
-<div class="account">
-    <h3>Akun 9</h3>
-    <div><span class="label">email:</span> <span id="email9"></span> <button onclick="copyToClipboard('email9')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password9"></span> <button onclick="copyToClipboard('password9')">Salin</button></div>
-</div>
-
-    <div id="helpPopup" class="help-popup">
-        <h3>Bantuan</h3>
-        <p>Jika butuh bantuan hubungi WhatsApp 6285751882714</p>
-        <button onclick="closeHelp()">Tutup</button>
     </div>
 
-    <div id="freezeLayer" class="frozen" style="display: none;">
-        <h2>Anda telah keluar dari browser</h2>
+
+
+   <div class="post-item slide-in-left">
+    <div id="blog-posts">
+        <!-- Konten blog posts akan ditambahkan di sini -->
     </div>
+
+
+
     
-     <script src="script.js"></script>
-     
+
+
+
+
+
+
+      <script src="script.js"></script>
 </body>
 </html>
