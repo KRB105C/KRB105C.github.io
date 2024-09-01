@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /script.js/
+
+Sitemap: https://www.sskrb.cloud/sitemap.xml
