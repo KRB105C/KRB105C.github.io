@@ -26,6 +26,41 @@
             font-family: Arial, sans-serif;
         
         }
+        
+        [id^="email"] {
+ display: flex; /* Aktifkan Flexbox */
+  justify-content: center; /* Pusatkan teks secara horizontal */
+  align-items: center; /* Pusatkan teks secara vertikal */
+background-color: #001017; /* Warna latar belakang */
+  color: #c4fff2; /* Warna teks */
+  border: 1px solid #02bbcc; /* Warna dan gaya border */
+  padding: 8px 79px; /* Ruang di dalam input */
+  border-radius: 9px; /* Sudut border yang melengkung */
+  font-size: 11px;/* Ukuran font */
+  
+  text-align: center; /* Menyelaraskan teks di tengah secara horizontal */
+  height: 10px; /* Tinggi input */
+  line-height: 10px; /* Untuk menyelaraskan teks secara vertikal */
+    white-space: nowrap; /* Mencegah teks membungkus ke baris baru */
+  overflow: auto; /* Menambahkan scrollbar horizontal jika teks terlalu panjang */
+
+
+}
+
+input[type="password"] {
+  background-color: #001017; /* Warna latar belakang */
+  color: #c4fff2; /* Warna teks */
+  border: 1px solid #02bbcc; /* Warna dan gaya border */
+  padding: 8px 28px; /* Ruang di dalam input */
+  border-radius: 9px; /* Sudut border yang melengkung */
+  font-size: 11px; /* Ukuran font */
+  text-align: center; /* Menyelaraskan teks di tengah secara horizontal */
+  height: 10px; /* Tinggi input */
+  line-height: 10px; /* Untuk menyelaraskan teks secara vertikal */
+  white-space: nowrap; /* Mencegah teks membungkus ke baris baru */
+  overflow: auto; /* Menambahkan scrollbar horizontal jika teks terlalu panjang */
+
+}
 
     }
     #contes {
@@ -188,11 +223,14 @@
             border: none;
             border-radius: 5px;
             background-color: #03f2ff;
+            border: 1px solid #6dfffb;
             color: rgb(0, 33, 36);
             cursor: pointer;
         }
         .account div button:hover {
             background-color: #025ab3;
+            color: #a3f9ff;
+        }
         }
         h2 {
             margin-bottom: 20px;
@@ -319,67 +357,69 @@
         <button class="help-button" onclick="showHelp()">?</button>
 
         <div class="account">
-    <h3>Akun 1</h3>
+      <h3>Akun 1</h3>
     <div><span class="label">email:</span> <span id="email1"></span> <button onclick="copyToClipboard('email1')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password1"></span> <button onclick="copyToClipboard('password1')">Salin</button></div>
+    <div><span class="label">pw:</span> 
+    <input type="password" id="password1" value="" readonly> <button onclick="copyToClipboard('password1')">Salin</button></div>
 </div>
 
 <div class="account">
     <h3>Akun 2</h3>
     <div><span class="label">email:</span> <span id="email2"></span> <button onclick="copyToClipboard('email2')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password2"></span> <button onclick="copyToClipboard('password2')">Salin</button></div>
+    <div><span class="label">pw:</span><input type="password" id="password2" value="" readonly> <button onclick="copyToClipboard('password2')">Salin</button></div>
 </div>
 
 <div class="account">
     <h3>Akun 3</h3>
     <div><span class="label">email:</span> <span id="email3"></span> <button onclick="copyToClipboard('email3')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password3"></span> <button onclick="copyToClipboard('password3')">Salin</button></div>
+    <div><span class="label">pw:</span> <input type="password" id="password3" value="" readonly> <button onclick="copyToClipboard('password3')">Salin</button></div>
 </div>
 
 <div class="account">
     <h3>Akun 4</h3>
     <div><span class="label">email:</span> <span id="email4"></span> <button onclick="copyToClipboard('email4')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password4"></span> <button onclick="copyToClipboard('password4')">Salin</button></div>
+    <div><span class="label">pw:</span> <input type="password" id="password4" value="" readonly> <button onclick="copyToClipboard('password4')">Salin</button></div>
 </div>
 
 <div class="account">
     <h3>Akun 5</h3>
     <div><span class="label">email:</span> <span id="email5"></span> <button onclick="copyToClipboard('email5')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password5"></span> <button onclick="copyToClipboard('password5')">Salin</button></div>
+    <div><span class="label">pw:</span> <input type="password" id="password5" value="" readonly> <button onclick="copyToClipboard('password5')">Salin</button></div>
 </div>
 
 <div class="account">
     <h3>Akun 6</h3>
     <div><span class="label">email:</span> <span id="email6"></span> <button onclick="copyToClipboard('email6')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password6"></span> <button onclick="copyToClipboard('password6')">Salin</button></div>
+    <div><span class="label">pw:</span> <input type="password" id="password6" value="" readonly> <button onclick="copyToClipboard('password6')">Salin</button></div>
 </div>
 
 <div class="account">
     <h3>Akun 7</h3>
     <div><span class="label">email:</span> <span id="email7"></span> <button onclick="copyToClipboard('email7')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password7"></span> <button onclick="copyToClipboard('password7')">Salin</button></div>
+    <div><span class="label">pw:</span> <input type="password" id="password7" value="" readonly> <button onclick="copyToClipboard('password7')">Salin</button></div>
 </div>
 
 <div class="account">
     <h3>Akun 8</h3>
     <div><span class="label">email:</span> <span id="email8"></span> <button onclick="copyToClipboard('email8')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password8"></span> <button onclick="copyToClipboard('password8')">Salin</button></div>
+    <div><span class="label">pw:</span> <input type="password" id="password8" value="" readonly> <button onclick="copyToClipboard('password8')">Salin</button></div>
 </div>
 
 <div class="account">
     <h3>Akun 9</h3>
     <div><span class="label">email:</span> <span id="email9"></span> <button onclick="copyToClipboard('email9')">Salin</button></div>
-    <div><span class="label">pw:</span> <span id="password9"></span> <button onclick="copyToClipboard('password9')">Salin</button></div>
-</div>
+    <div><span class="label">pw:</span> <input type="password" id="password9" value="" readonly><button onclick="copyToClipboard('password9')">Salin</button></div>
+    
+    </div>
 
     <div id="helpPopup" class="help-popup">
         <h3>Bantuan</h3>
         <p>Jika anda mengalami masalah saat menonton / streaming film, cobalah untuk menggunakan VPN (Amerika Serikat / Singapura)</p>
         <button onclick="closeHelp()">Tutup</button>
     </div>
-        <!-- Your existing HTML content continues here... -->
 
-    </div>
+</div>
+
 
  <script>
  
@@ -418,7 +458,7 @@
     checkIPAgainstBlacklist();
     
  
- // Fungsi untuk memparsing teks menjadi objek
+// Fungsi untuk memparsing teks menjadi objek
 function parseAccountData(text) {
     const accounts = [];
     const lines = text.trim().split('\n');
@@ -458,7 +498,12 @@ function updateAccountDivs(accounts) {
         }
 
         if (passwordElem) {
-            passwordElem.textContent = account.password || 'Tidak tersedia';
+            // Untuk elemen input dengan tipe password
+            if (passwordElem.tagName.toLowerCase() === 'input') {
+                passwordElem.value = account.password || 'Tidak tersedia';
+            } else {
+                passwordElem.textContent = account.password || 'Tidak tersedia';
+            }
         } else {
             console.warn(`Element dengan ID password${index + 1} tidak ditemukan.`);
         }
@@ -474,7 +519,6 @@ fetch('https://raw.githubusercontent.com/KRB105C/Tess/main/akunnetflixx')
         updateAccountDivs(accounts);
     })
     .catch(error => console.error('Error fetching account data:', error));
-
  
  var currentLink = null;
 
@@ -500,16 +544,26 @@ fetch('https://raw.githubusercontent.com/KRB105C/Tess/main/akunnetflixx')
         }
 
         function copyToClipboard(elementId) {
-            var text = document.getElementById(elementId).innerText;
-            var textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            alert('Teks disalin ke clipboard: ' + text);
-        }
+    var element = document.getElementById(elementId);
 
+    if (element.tagName.toLowerCase() === 'input') {
+        // Jika elemen adalah input, gunakan nilai dari elemen input
+        var text = element.value;
+    } else {
+        // Jika elemen bukan input, gunakan textContent
+        var text = element.textContent;
+    }
+
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+
+    alert('Teks disalin ke clipboard: ' + text);
+}
+    
         function showHelp() {
             document.getElementById('helpPopup').style.display = 'block';
         }
