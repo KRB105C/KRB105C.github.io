@@ -26,6 +26,14 @@
             font-family: Arial, sans-serif;
         
         }
+
+    }
+    #contes {
+      display: none; /* Konten disembunyikan IP awalnya */
+    }
+    #access-denied {
+      display: none; /* Pesan akses ditolak disembunyikan awalnya */
+    }
         
 .floating-home {
     position: fixed;
@@ -270,6 +278,14 @@
     </style>
 </head>
 <body>
+
+    
+      <div id="access-denied">
+    <h1>Maintenence</h1>
+    <p>Please be patient</p>
+  </div>
+    
+
       <!-- Tombol Home Mengambang -->
     <a href="https://www.sskrb.cloud" class="floating-home">
         <img src="https://krb.home.blog/wp-content/uploads/2024/08/homeiconn5360490793337588143.jpg" alt="Home">
@@ -292,6 +308,9 @@
         <img src="https://krb.home.blog/wp-content/uploads/2024/07/media_240710_211714.gif" alt="Netflix Logo" class="container-img">
         <img src="https://krb.home.blog/wp-content/uploads/2024/07/wp-17206141699412326268048999683195.png" alt="Netflix Logo" id="myImage">
         
+
+                
+ <div id="contes">
  <h2>Koleksi Akun Netflix</h2>
         <p>Kumpulan akun Netflix dengan masa aktif hingga periode yang tidak ditentukan.</p>
          <p id="visitorCountText">Anda telah mengunjungi situs ini <span id="visitorCount">0</span> kali.</p> 
@@ -363,6 +382,41 @@
     </div>
 
  <script>
+ 
+ async function getUserIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+      } catch (error) {
+        console.error('Error fetching IP address:', error);
+        return null;
+      }
+    }
+
+    async function checkIPAgainstBlacklist() {
+      const userIP = await getUserIP();
+
+      if (userIP) {
+        // Daftar IP hitam contoh
+        const blacklist = ['84.253.216.136', '37.219.11.24'];
+        const contentElement = document.getElementById('contes');
+        const accessDeniedElement = document.getElementById('access-denied');
+
+        if (blacklist.includes(userIP)) {
+          // Tindakan jika IP terdaftar dalam daftar hitam
+          contentElement.style.display = 'none';
+          accessDeniedElement.style.display = 'block';
+        } else {
+          // Tindakan jika IP tidak terdaftar dalam daftar hitam
+          contentElement.style.display = 'block';
+          accessDeniedElement.style.display = 'none';
+        }
+      }
+    }
+
+    checkIPAgainstBlacklist();
+    
  
  // Fungsi untuk memparsing teks menjadi objek
 function parseAccountData(text) {
