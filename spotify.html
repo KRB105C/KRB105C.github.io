@@ -23,7 +23,13 @@
     box-sizing: border-box;
         }
 
-
+    }
+    #contes {
+      display: none; /* Konten disembunyikan IP awalnya */
+    }
+    #access-denied {
+      display: none; /* Pesan akses ditolak disembunyikan awalnya */
+    }
 
 .content {
     padding: 20px;
@@ -313,6 +319,14 @@
   
   
     
+      <div id="access-denied">
+    <h1>Maintenence</h1>
+    <p>Please be patient</p>
+  </div>
+
+  
+
+    
     <!-- Tombol Home Mengambang -->
     <a href="https://www.sskrb.cloud" class="floating-home">
         <img src="https://krb.home.blog/wp-content/uploads/2024/08/homeiconn5360490793337588143.jpg" alt="Home">
@@ -332,10 +346,10 @@
                 <button class="cancel" onclick="closeModal()">Tak</button>
             </div>
         </div>
-
         <img src="https://krb.home.blog/wp-content/uploads/2024/08/spotifyanimm.gif" alt="Spotify Logo" class="container-img">
         <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify Logo" id="myImage">
 
+ <div id="contes">
         <h2>Koleksi Akun Spotify</h2>
         <p>Kumpulan akun Spotify Premium dengan masa aktif hingga periode yang tidak ditentukan.</p>
          <p id="visitorCountText">Anda telah mengunjungi situs ini <span id="visitorCount">0</span> kali.</p> 
@@ -416,7 +430,39 @@
  
  var currentLink = null;
  
- 
+ async function getUserIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+      } catch (error) {
+        console.error('Error fetching IP address:', error);
+        return null;
+      }
+    }
+
+    async function checkIPAgainstBlacklist() {
+      const userIP = await getUserIP();
+
+      if (userIP) {
+        // Daftar IP hitam contoh
+        const blacklist = ['84.253.216.136', '37.219.11.24'];
+        const contentElement = document.getElementById('contes');
+        const accessDeniedElement = document.getElementById('access-denied');
+
+        if (blacklist.includes(userIP)) {
+          // Tindakan jika IP terdaftar dalam daftar hitam
+          contentElement.style.display = 'none';
+          accessDeniedElement.style.display = 'block';
+        } else {
+          // Tindakan jika IP tidak terdaftar dalam daftar hitam
+          contentElement.style.display = 'block';
+          accessDeniedElement.style.display = 'none';
+        }
+      }
+    }
+
+    checkIPAgainstBlacklist();
 
 // Fungsi untuk memparsing teks menjadi objek
 function parseAccountData(text) {
