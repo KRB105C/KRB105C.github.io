@@ -2,12 +2,12 @@
   "version": 2,
   "builds": [
     { "src": "public/index.html", "use": "@vercel/static" },
-    { "src": "spotify/spotify.html", "use": "@vercel/static" },
-    { "src": "netflix/netflix.html", "use": "@vercel/static" }
+    { "src": "spotify/index.html", "use": "@vercel/static" },
+    { "src": "netflix/index.html", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/", "dest": "/public/index.html" },
-    { "src": "/spotify", "dest": "/spotify/spotify.html" },
-    { "src": "/netflix", "dest": "/netflix/netflix.html" }
+    { "src": "/spotify", "dest": "/spotify/index.html" },
+    { "src": "/netflix", "dest": "/netflix/index.html" }
   ]
 }
