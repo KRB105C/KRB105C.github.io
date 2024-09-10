@@ -1,17 +1,18 @@
-import { NextResponse } from 'next/server';
 import axios from 'axios';
 
-export async function GET(request) {
-  const url = new URL(request.url).searchParams.get('url');
+export default async function handler(req, res) {
+  const { url } = req.query;
   if (!url) {
-    return NextResponse.json({ error: 'URL is required' }, { status: 400 });
+    res.status(400).json({ error: 'URL is required' });
+    return;
   }
 
   try {
-    // Ambil data dari URL Instagram
+    // Ambil data dari Instagram
     const response = await axios.get(url);
-    return NextResponse.json(response.data);
+    res.status(200).json(response.data);
   } catch (error) {
-    return NextResponse.json({ error: 'Error occurred' }, { status: 500 });
+    console.error('Error:', error.message);
+    res.status(500).json({ error: 'Error occurred while fetching the data' });
   }
 }
