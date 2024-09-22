@@ -2,12 +2,14 @@
   "version": 2,
   "builds": [
     { "src": "public/index.html", "use": "@vercel/static" },
-    { "src": "Accountg/index.html", "use": "@vercel/static" }
+    { "src": "Accountg/index.html", "use": "@vercel/static" },
+    { "src": "public/style.css", "use": "@vercel/static" },
+    { "src": "public/script.js", "use": "@vercel/static" },
+    { "src": "Accountg/style.css", "use": "@vercel/static" },
+    { "src": "Accountg/script.js", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/", "dest": "/public/index.html" },
-    { "src": "/Accountg", "dest": "/Accountg/index.html" },
-    { "src": "/Accountg/script.js", "status": 404 },
-    { "src": "/Accountg/style.css", "status": 404 }
+    { "src": "/Accountg", "dest": "/Accountg/index.html" }
   ]
 }
