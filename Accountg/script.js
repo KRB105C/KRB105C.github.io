@@ -177,8 +177,8 @@ const blobSize = 100; // Ukuran blob
           break;
         case 'netflix':
           fetchAccounts = fetchAccountsForNetflix();
-          formatAccountDetails = account => `Email: ${account.email}\nSandi: ${account.password}`;
-          fileName = 'netflix_account.txt';
+          formatAccountDetails = account => `Username: ${account.email}\nSandi: ${account.password}`;
+          fileName = 'steam_account.txt';
           break;
         case 'cloudflare':
           fetchAccounts = fetchAccountsForCloudflare();
