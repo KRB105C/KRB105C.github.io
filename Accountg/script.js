@@ -44,7 +44,7 @@ const blobSize = 100; // Ukuran blob
       switch (platform) {
         case 'spotify':
           return 'https://raw.githubusercontent.com/KRB105C/Tess/main/akunspotifyyy';
-        case 'netflix':
+        case 'steam':
           return 'https://raw.githubusercontent.com/KRB105C/Tess/main/akunnetflixx';
         case 'cloudflare':
           return 'https://raw.githubusercontent.com/KRB105C/Tess/main/cloudflaree';
@@ -65,8 +65,8 @@ const blobSize = 100; // Ukuran blob
       });
     }
 
-    async function fetchAccountsForNetflix() {
-      const response = await fetch(getAccountsUrl('netflix'));
+    async function fetchAccountsForSteam() {
+      const response = await fetch(getAccountsUrl('steam'));
       const text = await response.text();
       return text.trim().split('\n\n').map(account => {
         const lines = account.split('\n');
@@ -139,10 +139,10 @@ const blobSize = 100; // Ukuran blob
       formatAccountDetails = account => `Email: ${account.email}\nSandi: ${account.password}`;
       fileName = 'spotify_account.txt';
       break;
-    case 'netflix':
-      fetchAccounts = fetchAccountsForNetflix();
-      formatAccountDetails = account => `Email: ${account.email}\nSandi: ${account.password}`;
-      fileName = 'netflix_account.txt';
+    case 'steam':
+      fetchAccounts = fetchAccountsForSteam();
+      formatAccountDetails = account => `Username: ${account.email}\nSandi: ${account.password}`;
+      fileName = 'steam_account.txt';
           break;
         case 'cloudflare':
           fetchAccounts = fetchAccountsForCloudflare();
@@ -175,8 +175,8 @@ const blobSize = 100; // Ukuran blob
           formatAccountDetails = account => `Email: ${account.email}\nSandi: ${account.password}`;
           fileName = 'spotify_account.txt';
           break;
-        case 'netflix':
-          fetchAccounts = fetchAccountsForNetflix();
+        case 'steam':
+          fetchAccounts = fetchAccountsForSteam();
           formatAccountDetails = account => `Username: ${account.email}\nSandi: ${account.password}`;
           fileName = 'steam_account.txt';
           break;
