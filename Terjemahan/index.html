@@ -83,8 +83,9 @@
 
     <button onclick="translateText('simple')">🔄 Terjemahan Sederhana</button>
     <button onclick="translateText('formal')">📖 Terjemahan Lanjutan</button>
+    <button onclick="checkGrammar()">🔍 Periksa Grammar</button>
 
-    <div id="outputText">Hasil terjemahan akan muncul di sini...</div>
+    <div id="outputText">Hasil akan muncul di sini...</div>
     <button onclick="copyText()">📄 Salin Hasil</button>
 
     <div id="logBox">Log aktivitas akan muncul di sini...</div>
@@ -111,12 +112,29 @@
             if (style === "simple") {
                 prompt = `Terjemahkan teks berikut dari ${fromLang} ke ${toLang} secara langsung tanpa tambahan penjelasan atau teks lain: "${inputText}"`;
             } else {
-                if (direction === "id-en") {
-                    prompt = `Terjemahkan teks berikut dari ${fromLang} ke ${toLang} dengan bahasa yang baik dan benar. dan berikan keterangannya dalam bahasa Indonesia: "${inputText}"`;
-                } else {
-                    prompt = `Terjemahkan teks berikut dari ${fromLang} ke ${toLang} dengan bahasa yang baik dan benar: "${inputText}"`;
-                }
+                prompt = `Terjemahkan teks berikut dari ${fromLang} ke ${toLang} dengan bahasa yang baik dan benar: "${inputText}"`;
             }
+
+            sendToAI(prompt, "Terjemahan sukses");
+        }
+
+        async function checkGrammar() {
+            const inputText = document.getElementById("inputText").value;
+
+            if (!inputText) {
+                document.getElementById("outputText").textContent = "Masukkan teks terlebih dahulu!";
+                addLog("⚠️ Error: Input teks kosong!", "log-error");
+                return;
+            }
+
+            const prompt = `Apakah grammar ini sudah benar? Jika belum benar, coba perbaiki: "${inputText}"`;
+
+            sendToAI(prompt, "Grammar diperiksa");
+        }
+
+        async function sendToAI(prompt, successMessage) {
+            const outputDiv = document.getElementById("outputText");
+            const logBox = document.getElementById("logBox");
 
             addLog(`🔄 Mengirim permintaan ke AI...`, "log-info");
             addLog(`📡 Permintaan API: ${prompt}`, "log-warning");
@@ -133,11 +151,11 @@
                 const data = await response.json();
                 addLog(`📥 Respons API Diterima: ${JSON.stringify(data, null, 2)}`, "log-info");
 
-                let resultText = data.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Terjemahan gagal!";
+                let resultText = data.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Proses gagal!";
                 resultText = resultText.replace(/\*\*/g, "");
                 
                 outputDiv.textContent = resultText;
-                addLog(`✅ Terjemahan sukses: ${resultText}`, "log-success");
+                addLog(`✅ ${successMessage}: ${resultText}`, "log-success");
             } catch (error) {
                 outputDiv.textContent = "❌ Terjadi kesalahan: " + error.message;
                 addLog(`🚨 Error: ${error.message}`, "log-error");
@@ -176,13 +194,13 @@
         function copyText() {
             const outputText = document.getElementById("outputText").textContent;
             navigator.clipboard.writeText(outputText).then(() => {
-                alert("📄 Hasil terjemahan disalin!");
+                alert("📄 Hasil disalin!");
             }).catch(err => console.error("Gagal menyalin teks:", err));
         }
 
         function clearText() {
             document.getElementById("inputText").value = "";
-            document.getElementById("outputText").textContent = "Hasil terjemahan akan muncul di sini...";
+            document.getElementById("outputText").textContent = "Hasil akan muncul di sini...";
             document.getElementById("logBox").textContent = "Log aktivitas akan muncul di sini...";
         }
 
