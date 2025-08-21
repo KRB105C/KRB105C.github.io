@@ -78,6 +78,8 @@
     <select id="direction">
         <option value="en-id">🇬🇧 Inggris ➝ 🇮🇩 Indonesia</option>
         <option value="id-en">🇮🇩 Indonesia ➝ 🇬🇧 Inggris</option>
+        <option value="id-es">🇮🇩 Indonesia ➝ 🇸🇻 Spanyol (Amerika Tengah)</option>
+        <option value="es-id">🇪🇸🌎 Spanyol ➝ 🇮🇩 Indonesia</option>
     </select>
     <br>
 
@@ -96,7 +98,6 @@
         async function translateText(style) {
             const inputText = document.getElementById("inputText").value;
             const outputDiv = document.getElementById("outputText");
-            const logBox = document.getElementById("logBox");
             const direction = document.getElementById("direction").value;
 
             if (!inputText) {
@@ -105,9 +106,19 @@
                 return;
             }
 
-            const fromLang = direction === "en-id" ? "Inggris" : "Indonesia";
-            const toLang = direction === "en-id" ? "Indonesia" : "Inggris";
+            // tentukan bahasa asal & tujuan
+            let fromLang, toLang;
+            if (direction === "en-id") {
+                fromLang = "Inggris"; toLang = "Indonesia";
+            } else if (direction === "id-en") {
+                fromLang = "Indonesia"; toLang = "Inggris";
+            } else if (direction === "id-es") {
+                fromLang = "Indonesia"; toLang = "Spanyol (Amerika Tengah)";
+            } else if (direction === "es-id") {
+                fromLang = "Spanyol"; toLang = "Indonesia";
+            }
 
+            // buat prompt untuk API
             let prompt;
             if (style === "simple") {
                 prompt = `Terjemahkan teks berikut dari ${fromLang} ke ${toLang} secara langsung tanpa tambahan penjelasan atau teks lain: "${inputText}"`;
@@ -134,7 +145,6 @@
 
         async function sendToAI(prompt, successMessage) {
             const outputDiv = document.getElementById("outputText");
-            const logBox = document.getElementById("logBox");
 
             addLog(`🔄 Mengirim permintaan ke AI...`, "log-info");
             addLog(`📡 Permintaan API: ${prompt}`, "log-warning");
@@ -153,7 +163,7 @@
 
                 let resultText = data.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Proses gagal!";
                 resultText = resultText.replace(/\*\*/g, "");
-                
+
                 outputDiv.textContent = resultText;
                 addLog(`✅ ${successMessage}: ${resultText}`, "log-success");
             } catch (error) {
