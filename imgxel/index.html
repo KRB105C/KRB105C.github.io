@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel Converter + Grid & Konfirmasi Reload</title>
+<style>
+  body { font-family: sans-serif; text-align: center; background: #222; color: #fff; }
+  input, button { margin: 10px; }
+  canvas { image-rendering: pixelated; border: 1px solid #555; max-width: 95%; margin-top: 10px; background:#111; }
+  #info { margin-top: 10px; text-align:left; max-width:95%; margin:10px auto; background:#333; padding:10px; border-radius:8px; }
+  .color-box{display:inline-block;width:12px;height:12px;margin-right:5px;vertical-align:middle;}
+  #downloadBtn { background:#4CAF50; color:#fff; border:none; padding:8px 16px; cursor:pointer; border-radius:5px; }
+  #downloadBtn:hover { background:#45a049; }
+</style>
+</head>
+<body>
+  <h1>Konversi Gambar ke Pixel + Grid & Konfirmasi Reload</h1>
+  <input type="file" id="fileInput" accept="image/*"><br>
+  <label>Ukuran blok: <input type="number" id="blockSize" value="10" min="2" max="100"></label>
+  <br>
+  <button id="downloadBtn" style="display:none;">Download Hasil Pixel</button>
+  <br>
+  <canvas id="canvas"></canvas>
+  <div id="info"></div>
+
+<script>
+const fileInput = document.getElementById('fileInput');
+const blockInput = document.getElementById('blockSize');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const infoDiv = document.getElementById('info');
+const downloadBtn = document.getElementById('downloadBtn');
+let img = new Image();
+
+// Bendera supaya popup hanya muncul saat user ubah block size
+let askReloadOnInput = true;
+
+fileInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    img.onload = () => {
+      drawPixel();
+      downloadBtn.style.display = 'inline-block'; // tampilkan tombol download
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+blockInput.addEventListener('input', () => {
+  if (askReloadOnInput) {
+    const confirmReload = confirm("Anda mengubah ukuran pixel. Mau reload halaman?");
+    if (confirmReload) {
+      location.reload();
+      return; // hentikan supaya tidak render setelah reload
+    } else {
+      // user pilih tidak reload, tetap render dengan ukuran baru
+      drawPixel();
+    }
+  } else {
+    drawPixel();
+  }
+});
+
+downloadBtn.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.download = 'hasil-pixel.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+});
+
+function drawPixel() {
+  if (!img.src) return;
+  const blockSize = parseInt(blockInput.value) || 10;
+  const cols = Math.ceil(img.width / blockSize);
+  const rows = Math.ceil(img.height / blockSize);
+
+  canvas.width = img.width + 60;
+  canvas.height = img.height + 60;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = '#111';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  const offsetX = 50, offsetY = 20;
+  const tempCanvas = document.createElement('canvas');
+  const tempCtx = tempCanvas.getContext('2d');
+  tempCanvas.width = cols; tempCanvas.height = rows;
+  tempCtx.drawImage(img, 0, 0, cols, rows);
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(tempCanvas, 0, 0, cols, rows, offsetX, offsetY, cols*blockSize, rows*blockSize);
+
+  // hitung warna blok
+  const imageData = tempCtx.getImageData(0, 0, cols, rows).data;
+  const colorCounts = {};
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const idx = (y * cols + x) * 4;
+      const r = imageData[idx], g = imageData[idx+1], b = imageData[idx+2], a = imageData[idx+3];
+      if (a===0) continue;
+      const color = `rgb(${r},${g},${b})`;
+      colorCounts[color] = (colorCounts[color]||0)+1;
+    }
+  }
+
+  // gambar grid + penomoran
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+  ctx.font = "10px sans-serif";
+  ctx.fillStyle = "#fff";
+  for(let i=0;i<=cols;i++){
+    const x = offsetX + i*blockSize;
+    ctx.beginPath(); ctx.moveTo(x,offsetY); ctx.lineTo(x,offsetY+rows*blockSize); ctx.stroke();
+    if(i<cols){
+      const label = i;
+      ctx.fillText(label, offsetX + i*blockSize + blockSize/2 - 4, offsetY - 5);
+      ctx.fillText(label, offsetX + i*blockSize + blockSize/2 - 4, offsetY+rows*blockSize+15);
+    }
+  }
+  for(let j=0;j<=rows;j++){
+    const y = offsetY + j*blockSize;
+    ctx.beginPath(); ctx.moveTo(offsetX,y); ctx.lineTo(offsetX+cols*blockSize,y); ctx.stroke();
+    if(j<rows){
+      const label = j;
+      ctx.fillText(label, offsetX - 20, offsetY + j*blockSize + blockSize/2+3);
+      ctx.fillText(label, offsetX+cols*blockSize+5, offsetY + j*blockSize + blockSize/2+3);
+    }
+  }
+
+  // tampilkan info
+  let html = `<p>Jumlah blok horizontal: ${cols}</p>`;
+  html += `<p>Jumlah blok vertikal: ${rows}</p>`;
+  html += `<p>Total blok: ${cols*rows}</p><h3>Jumlah blok per warna:</h3><ul>`;
+  Object.entries(colorCounts).sort((a,b)=>b[1]-a[1]).forEach(([color,count])=>{
+    html += `<li><span class="color-box" style="background:${color}"></span>${color}: ${count}</li>`;
+  });
+  html += `</ul>`;
+  infoDiv.innerHTML = html;
+}
+</script>
+</body>
+</html>
